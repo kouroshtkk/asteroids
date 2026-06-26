@@ -22,6 +22,8 @@ def main():
     Asteroid.containers =(updatable,drawable,asteroids)
     AsteroidField.containers = updatable
     asteroid_field = AsteroidField()
+    score = 0
+    font = pygame.font.SysFont(None,36)
     player = Player(SCREEN_WIDTH/2,SCREEN_HEIGHT/2)
     dt = 0.0
     while True:
@@ -30,6 +32,8 @@ def main():
             if event.type==pygame.QUIT:
                 return
         screen.fill("black")
+        score_text = font.render(f"Score : {score}",True,"white")
+        screen.blit(score_text,(10,10))
         for elem in drawable:
             elem.draw(screen)
         updatable.update(dt)
@@ -41,7 +45,7 @@ def main():
             for sh in shots:
                 if ast.collides_with(sh):
                     log_event("asteroid_shot")
-                    ast.split()
+                    score+=ast.split()
                     sh.kill()
         pygame.display.flip()
         dt = clock.tick(60)/1000
