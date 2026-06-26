@@ -26,27 +26,44 @@ def main():
     font = pygame.font.SysFont(None,36)
     player = Player(SCREEN_WIDTH/2,SCREEN_HEIGHT/2)
     dt = 0.0
+    GAME_STATE = "PLAYING"
     while True:
         log_state()
         for event in pygame.event.get():
             if event.type==pygame.QUIT:
                 return
+        if GAME_STATE =="PLAYING":
+            updatable.update(dt)
+            for ast in asteroids:
+                if ast.collides_with(player):
+                    log_event("player_hit")
+                    print("Game over!")
+                    GAME_STATE="GAME_OVER"
+                for sh in shots:
+                    if ast.collides_with(sh):
+                        log_event("asteroid_shot")
+                        score+=ast.split()
+                        sh.kill()
+        elif GAME_STATE =="GAME_OVER":
+            keys = pygame.key.get_pressed()
+            if keys[pygame.K_RETURN]:
+                updatable.empty()
+                asteroids.empty()
+                drawable.empty()
+                shots.empty()
+                player = Player(SCREEN_WIDTH/2,SCREEN_HEIGHT/2)
+                asteroid_field = AsteroidField()
+                score=0
+                GAME_STATE ="PLAYING"
         screen.fill("black")
         score_text = font.render(f"Score : {score}",True,"white")
         screen.blit(score_text,(10,10))
         for elem in drawable:
             elem.draw(screen)
-        updatable.update(dt)
-        for ast in asteroids:
-            if ast.collides_with(player):
-                log_event("player_hit")
-                print("Game over!")
-                sys.exit()
-            for sh in shots:
-                if ast.collides_with(sh):
-                    log_event("asteroid_shot")
-                    score+=ast.split()
-                    sh.kill()
+        if GAME_STATE == "GAME_OVER":
+            game_over_text = font.render(f"Game over with {score}",True,"white")
+            screen.blit(game_over_text,(SCREEN_WIDTH/2-100,SCREEN_HEIGHT/2))
+
         pygame.display.flip()
         dt = clock.tick(60)/1000
 
