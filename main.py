@@ -16,11 +16,12 @@ def main():
     updatable = pygame.sprite.Group()
     drawable = pygame.sprite.Group()
     asteroids = pygame.sprite.Group()
+    field_updatable=pygame.sprite.Group()
     shots = pygame.sprite.Group()
     Shot.containers =(updatable,drawable,shots)
-    Player.containers = (updatable,drawable)
+    Player.containers = (drawable,field_updatable)
     Asteroid.containers =(updatable,drawable,asteroids)
-    AsteroidField.containers = updatable
+    AsteroidField.containers = field_updatable
     asteroid_field = AsteroidField()
     score = 0
     font = pygame.font.SysFont(None,36)
@@ -34,6 +35,7 @@ def main():
                 return
         if GAME_STATE =="PLAYING":
             updatable.update(dt)
+            field_updatable.update(dt,score)
             for ast in asteroids:
                 if ast.collides_with(player):
                     log_event("player_hit")
@@ -48,6 +50,7 @@ def main():
             keys = pygame.key.get_pressed()
             if keys[pygame.K_RETURN]:
                 updatable.empty()
+                field_updatable.empty()
                 asteroids.empty()
                 drawable.empty()
                 shots.empty()
