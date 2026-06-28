@@ -75,7 +75,7 @@ python main.py
   - `game_state.jsonl` (frame snapshot metrics)
   - `game_events.jsonl` (milestone event triggers)
   These files are generated locally and ignored by Git.
-- **Dynamic Difficulty:** The player's ship speed scales dynamically with the current score up to a maximum limit to naturally increase difficulty as the game progresses.
+- **Dynamic Difficulty:** Both the player's ship speed and the speed of incoming asteroids scale dynamically with the current score up to a maximum limit, naturally increasing the challenge as the game progresses.
 
 ---
 
