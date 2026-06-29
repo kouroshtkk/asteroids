@@ -76,7 +76,7 @@ python main.py
   - `game_events.jsonl` (milestone event triggers)
   These files are generated locally and ignored by Git.
 - **Dynamic Difficulty:** Both the player's ship speed and the speed of incoming asteroids scale dynamically with the current score up to a maximum limit, naturally increasing the challenge as the game progresses.
-
+- **Asteroid destruction effect** the particles when the asteroid is destoryed are harmless!!
 ---
 
 ## License
