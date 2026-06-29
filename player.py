@@ -42,12 +42,12 @@ class Player(CircleShape):
     def move(self,dt:float,score:int):
         unit_vector = pygame.Vector2(0,1)
         rotated_vector=unit_vector.rotate(self.rotation)
-        added_score=score
+        added_score=score/10
         if score>1000:
             added_score=100
         elif score<-1000:
             added_score=100
-        rotated_with_speed_vector = rotated_vector * ((PLAYER_SPEED + added_score/10) * dt)
+        rotated_with_speed_vector = rotated_vector * ((PLAYER_SPEED + added_score) * dt)
         self.position+=rotated_with_speed_vector
 
     def shoot(self,score):

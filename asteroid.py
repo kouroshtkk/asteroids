@@ -24,12 +24,13 @@ class Asteroid(CircleShape):
         new_vect2_part = self.velocity.rotate(-particle_angel)
         new_vect3_part = self.velocity.rotate(particle_angel+30)
         new_radius = self.radius - ASTEROID_MIN_RADIUS
-        particle_radius=ASTEROID_MIN_RADIUS/2
+        particle_radius=ASTEROID_MIN_RADIUS/3
+        particle_radius2=ASTEROID_MIN_RADIUS/2.5
         new_ast = Asteroid(self.position.x,self.position.y,new_radius)
         new_ast2 = Asteroid(self.position.x,self.position.y,new_radius)
         particle= Particle(self.position.x,self.position.y,particle_radius)
         particle2= Particle(self.position.x,self.position.y,particle_radius)
-        particle3= Particle(self.position.x,self.position.y,particle_radius)
+        particle3= Particle(self.position.x,self.position.y,particle_radius2)
         particle.velocity=new_vect_part*1.2
         particle2.velocity=new_vect2_part*1.2
         particle3.velocity=new_vect3_part*1.2
