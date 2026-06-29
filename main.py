@@ -12,6 +12,7 @@ def main():
     print(f"Screen width: {SCREEN_WIDTH}")
     print(f"Screen height: {SCREEN_HEIGHT}")
     pygame.init()
+    bg = pygame.image.load("back.jpg")
     screen = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT))
     clock = pygame.time.Clock()
     updatable = pygame.sprite.Group()
@@ -62,7 +63,7 @@ def main():
                 asteroid_field = AsteroidField()
                 score=0
                 GAME_STATE ="PLAYING"
-        screen.fill("black")
+        screen.blit(bg,(0,0))
         score_text = font.render(f"Score : {score}",True,"white")
         screen.blit(score_text,(10,10))
         for elem in drawable:
